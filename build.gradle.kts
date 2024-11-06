@@ -1,6 +1,7 @@
 plugins {
     java
-    id("com.github.johnrengelman.shadow") version "8.1.1"
+    // id("com.github.johnrengelman.shadow") version "8.1.1"
+    id("maven-publish")
 }
 
 java {
@@ -25,16 +26,18 @@ dependencies {
     // compileOnly("org.bukkit:bukkit:1.8.8-R0.1-SNAPSHOT")
 
     // Lombok (QOL)
-    compileOnly("org.projectlombok:lombok:1.18.30")
-    annotationProcessor("org.projectlombok:lombok:1.18.30")
+    compileOnly("org.projectlombok:lombok:1.18.34")
+    annotationProcessor("org.projectlombok:lombok:1.18.34")
 }
 
-tasks.build {
-    dependsOn("shadowJar")
-    doLast {
-        val exportPath: String by project
-        val buildJar = File("${projectDir}/build/libs", "${rootProject.name}-${rootProject.version}-all.jar")
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "me.nixuge.servermanager"
+            artifactId = "types"
+            version = "1.0"
 
-        buildJar.copyTo(File(exportPath, buildJar.name), true)
+            from(components["java"])
+        }
     }
 }

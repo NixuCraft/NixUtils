@@ -10,9 +10,11 @@ import java.net.URL;
 import me.nixuge.nixutils.misc.Pair;
 
 public class HTTPUtils {
+    @Deprecated
     private static Pair<Integer, String> sendRequest(String method, String url) throws Exception {
         return sendRequest(method, url, null);
     }
+    @Deprecated
     private static Pair<Integer, String> sendRequest(String method, String url, String body) throws Exception {
         // Make objects
 		URL obj = new URL(url);
@@ -50,9 +52,11 @@ public class HTTPUtils {
         
         return new Pair<>(con.getResponseCode(), responseBodyBuilder.toString());
     }
+    @Deprecated
     public static Pair<Integer, String> sendJsonPOST(String url, String jsonString) throws Exception {
         return sendRequest("POST", url, jsonString);
     }
+    @Deprecated
     public static Pair<Integer, String> sendGET(String url) throws Exception {
         return sendRequest("GET", url);
     }
